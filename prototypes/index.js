@@ -18,7 +18,7 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
-  orangePetNames() {
+  orangePetNames(kitties) {
     // Return an array of just the names of kitties who are orange e.g.
         // ['Tiger', 'Snickers']
 
@@ -26,18 +26,28 @@ const kittyPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+    goodKitties = []
+
+    kitties.forEach(kittie => {
+      if (kittie.color === 'orange') {
+        goodKitties.push(kittie.name)
+      }
+    })
+    return goodKitties
   },
 
-  sortByAge() {
+  sortByAge(kitties) {
     // Sort the kitties by their age
 
     /* CODE GOES HERE */
 
     // Annotation:
     // Write your annotation here as a comment
+    kitties.sort((a, b) => b.age - a.age)
+    return kitties
   },
 
-  growUp() {
+  growUp(kitties) {
     // Return an array of kitties who have all grown up by 2 years e.g.
     // [{
     //   name: 'Felicia',
@@ -52,6 +62,10 @@ const kittyPrompts = {
     // ...etc]
 
     /* CODE GOES HERE */
+    //  kitties.forEach(kittie => kittie.age +2).sort((a, b) => b.age - a.age)
+    kitties.sort((a, b) => b.age - a.age)
+    kitties.forEach(kittie => kittie.age += 2)
+    return kitties
   }
 };
 
@@ -75,7 +89,7 @@ const kittyPrompts = {
 
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
-  membersBelongingToClubs() {
+  membersBelongingToClubs(clubs) {
     // Your function should access the clubs data through a parameter (it is being passed as an argument in the test file)
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g.
@@ -85,10 +99,50 @@ const clubPrompts = {
     //   ...etc
     // }
 
+    //{ club: 'Drama', 
+    //members: ['Louisa', 'Pam', 'Nathaniel' ] }
+
     /* CODE GOES HERE */
 
     // Annotation:
     // Write your annotation here as a comment
+    let names = {}
+
+    clubs.forEach(club => {
+      club.members.forEach(member => {
+        if(!names[member]) {
+          names[member] = []
+        } 
+        names[member].push(club.club)
+      })
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // clubs.forEach(club => {
+    //   club.members.forEach(member => {
+    //     if (names[member]) {
+    //       console.log('hihi');
+    //       names[member].push(club.club)
+    //     } else {
+    //       names[member] = [club.club]
+          
+    //     }
+    //   })
+    // })
+    return names
   }
 };
 
