@@ -178,6 +178,19 @@ const modPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+
+    // input: array of objects
+    // output: array of objects, where each object has a property of mod and value of how many students per instructor on average.
+
+    let averagedMods = []
+    //console.log(mods);
+      mods.forEach(mod => {
+        averagedMods.push({'mod': mod.mod, 'studentsPerInstructor': mod.students / mod.instructors })
+      })
+
+
+     // console.log(averagedMods);
+      return averagedMods
   }
 };
 
@@ -212,6 +225,19 @@ const cakePrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+    
+    // input: array of objects with one of the properties being an array.
+
+    // output: array of objects where you have two properties, 1st property is "flavor" and the second property is "inStock" aka how much of this stuff is in stock.
+      let newCakes = cakes.map(cake => {
+        
+        return {
+          "flavor" : cake.cakeFlavor,
+          'inStock' : cake.inStock,
+
+        }
+      })
+      return newCakes
   },
 
   onlyInStock() {
@@ -239,6 +265,9 @@ const cakePrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+
+    let inStockCakes = cakes.filter(cake => cake.inStock > 0)
+    return inStockCakes
   },
 
   totalInventory() {
@@ -249,6 +278,11 @@ const cakePrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+    let totalStock = null
+    cakes.forEach(cake => {
+      totalStock += cake.inStock
+    })
+    return totalStock
   },
 
   allToppings() {
@@ -260,6 +294,20 @@ const cakePrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+    
+    //output: array of strings for all the toppings with no duplicates
+
+    let toppings = []
+    cakes.forEach(cake => {
+      cake.toppings.forEach(topping => {
+        if (!toppings.includes(topping)) {
+          toppings.push(topping)
+        
+        }
+      })
+     
+    })
+    return toppings
   },
 
   groceryList() {
@@ -277,6 +325,21 @@ const cakePrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+
+    //output: an object with properties of each topping and value of how many times it's mentioned in all the data set.
+
+    let toppings = {}
+    cakes.forEach(cake => {
+      cake.toppings.forEach(topping => {
+        if (!toppings[topping]) {
+
+          //toppings[topping]  
+          toppings[topping] = 0
+        }
+        toppings[topping] += 1
+      })
+    })
+    return toppings
   }
 };
 
