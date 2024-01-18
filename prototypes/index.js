@@ -374,6 +374,14 @@ const classPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+
+    //  input: an array of objects
+    //  output: an array of objects of rooms that are just frontend.
+
+    let feClassrooms = classrooms.filter(classroom => classroom.program === 'FE')
+
+    return feClassrooms
+
   },
 
   totalCapacities() {
@@ -388,7 +396,38 @@ const classPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+    // output: an object where each property is a program with value of total number for capacity
+
+    let capacity = {}
+
+    classrooms.forEach(classroom => {
+      if (!capacity[classroom.program]) {
+        capacity[classroom.program] = 0
+      }
+      capacity[classroom.program] += classroom.capacity
+      // if (classroom.program === 'FE' && !capacity.feCapacity) {
+        //   capacity.feCapacity = 0
+        // } 
+        // if (classroom.program === 'FE' && capacity.feCapacity >= 0)
+        //   capacity.feCapacity += classroom.capacity
+        
+        // if (classroom.program === 'BE' && !capacity.beCapacity) {
+          //   capacity.beCapacity = 0
+          // } 
+          
+          // if (classroom.program === 'BE' && capacity.beCapacity >= 0)
+          //   capacity.beCapacity += classroom.capacity
+        })
+        capacity.beCapacity = capacity.BE 
+        capacity.feCapacity = capacity.FE
+       
+        delete capacity.BE  
+        delete capacity.FE
+       
+    return capacity
   },
+
+  
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
@@ -397,6 +436,10 @@ const classPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+
+    // output: an array of objects sorted by capacity with least at the top
+      classrooms.sort((a, b) => a.capacity - b.capacity)
+    return classrooms
   }
 };
 
