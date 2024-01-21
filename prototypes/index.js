@@ -521,6 +521,15 @@ const weatherPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+    // input: array of objects where the property of temperature is an object.
+    // output: an array of average temperatures from the high/low properties of the temperature object.
+
+    let averages = weather.map(place => {
+    return (place.temperature.high + place.temperature.low) / 2
+      
+    })
+    //console.log(averages)
+    return averages
   },
 
   findSunnySpots() {
@@ -534,6 +543,16 @@ const weatherPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+
+    // output: an array of strings where each item includes sunny.
+
+    let sunnyPlaces = []
+    weather.forEach(location => {
+      if(location.type.includes('sunny')) {
+        sunnyPlaces.push(`${location.location} is ${location.type}.`)
+      }
+    })
+    return sunnyPlaces
   },
 
   findHighestHumidity() {
@@ -549,7 +568,11 @@ const weatherPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+    // output: return the object with highest humidity.
 
+    weather.sort((a, b) => b.humidity - a.humidity)
+    console.log(weather)
+    return weather[0]
   }
 };
 
